@@ -134,7 +134,7 @@ def methods_for_answers():
 
 
     elif  request.method =='GET':
-        conn = sqlite3.connect('test3.db')
+        conn = sqlite3.connect('database.db')
         c = conn.cursor()
 
         #Retrieving Model, Start, End
