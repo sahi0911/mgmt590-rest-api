@@ -6,7 +6,6 @@ from transformers.pipelines import pipeline
 from flask import Flask
 from flask import request
 from flask import jsonify
-import torch
 
 #Create Flask App
 app = Flask(__name__)
