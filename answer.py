@@ -93,7 +93,7 @@ def methods_for_answers():
         data = request.json
         #Default model when no model is specified
         if not model_name:
-            model_name='deepset-roberta'    
+            model_name='distilled-bert'    
         conn = sqlite3.connect('database.db')
         c = conn.cursor()
         #Query to retireve information of that particular model
@@ -206,6 +206,8 @@ def methods_for_answers():
         c.close()
         conn.close()
         return jsonify(li)
+        
+
         
 
 
