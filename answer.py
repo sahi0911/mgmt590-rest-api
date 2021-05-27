@@ -1,5 +1,4 @@
 #Importing Libraries
-import os
 import sqlite3
 import time
 from transformers.pipelines import pipeline
@@ -134,9 +133,39 @@ def methods_for_answers():
 
 
     elif  request.method =='GET':
+        
         conn = sqlite3.connect('database.db')
         c = conn.cursor()
-
+       
+        name= request.args.get('model')
+        start= request.args.get('start')
+        end= request.args.get('end')
+        if name:
+            c.execute('SELECT * FROM qa_log WHERE model=? AND timestamp >=? AND timestamp <=?',(name,start,end))
+            model = c.fetchall()
+            output=[]
+            for row in model:
+              record = {"timestamp": row[4],
+                        "model":row[3],
+                        "answer": row[2],
+                        "question": row[0],
+                        "context": row[1]}
+              output.append(record)
+            return jsonify(output)
+        else:
+            c.execute('SELECT * FROM qa_log WHERE timestamp >=? AND timestamp <=?',(start,end))
+            model = c.fetchall()
+            output=[]
+            for row in model:
+              record = {"timestamp": row[4],
+                        "model":row[3],
+                        "answer": row[2],
+                        "question": row[0],
+                        "context": row[1]}
+              output.append(record)
+            return jsonify(output)
+       
+        
         #Retrieving Model, Start, End
         model_name = request.args.get('model', None)
         start = float(request.args.get('start', None))
