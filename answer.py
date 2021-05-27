@@ -5,6 +5,7 @@ from transformers.pipelines import pipeline
 from flask import Flask
 from flask import request
 from flask import jsonify
+import os
 
 #Create Flask App
 app = Flask(__name__)
@@ -206,6 +207,7 @@ def methods_for_answers():
         conn.close()
         return jsonify(li)
         
+
 
 
 if __name__ == '__main__':
