@@ -1,4 +1,4 @@
-#Importing Libraries
+#Importing Library
 import sqlite3
 import time
 from transformers.pipelines import pipeline
